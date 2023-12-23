@@ -1,0 +1,611 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head> 
+  <title>Snowlake</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+  <style>
+
+   :root { 
+    
+	--color-red: #d75959; 
+	--color-yellow: #f5c463;
+	--color-green: #d0ea74;
+    --color-blue: #da4b15;
+    --rgb-black: 0, 0, 0;
+	 
+}
+      *{
+          color: white;
+      }
+ 
+      body{
+          font-family: 'Poppins', sans-serif;
+          background-color: #000000;
+background-image: linear-gradient(147deg, #000000 0%, #000000 74%);
+          height: 100vh;
+          color: white;
+      }
+      
+      .wrapper{
+          margin-top: 40px;
+      }
+.progress-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+ 
+.progress-list li .line {
+    position: relative;
+}
+.progressbar:not(.circle) svg,
+.progressbar:not(.circle) svg path {
+    border-radius: 20px;
+}
+.progressbar svg path:first-child {
+    stroke: rgba(var(--rgb-black), 0.09);
+}
+.progressbar.border {
+    border: 1px solid transparent;
+    box-sizing: border-box;
+}
+.progressbar.border svg path:first-child {
+    stroke: transparent;
+}
+.progressbar.line svg {
+    height: 5px;
+}
+.progressbar.line.border svg {
+    height: 4px;
+}
+.progressbar.circle {
+    position: relative;
+    margin: 0 auto 30px;
+}
+
+
+.progressbar.circle {
+    width: 170px;
+    height: 85px;
+}
+.progressbar.circle .progressbar-text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    font-size: 40px;     
+    display: flex;     
+    align-items: flex-end;     
+    justify-content: center;
+    color: white !important;
+    font-weight: bold;
+}
+.progressbar.circle .progressbar-text:after {
+    content: "%";
+    display: block;
+    font-size: 20px;
+    padding-left: 2px;
+}
+ 
+  
+ 
+ 
+.progressbar.red svg path:last-child {
+    stroke: var(--color-red)
+}
+ 
+.progressbar.yellow svg path:last-child {
+    stroke: var(--color-yellow)
+}
+.progressbar.green svg path:last-child {
+    stroke: var(--color-green)
+}
+ 
+ 
+ 
+ 
+.progressbar.blue svg path:last-child {
+    stroke: var(--color-blue)
+}
+ 
+ 
+      h5{
+          background: transparent;
+          padding: 10px;
+          width: 75%;
+          margin: 0 auto;
+          border-radius: 50px;
+          border: 2px solid #ebebeb;
+          font-size: 17px;
+          color: white;
+      }
+      p{
+          margin-top: 25px;
+      }
+
+      /* Add this to your existing style block */
+textarea {
+    width: 100%;
+    height: 150px;
+    margin-top: 25px;
+    padding: 10px;
+    border: 2px solid #ebebeb;
+    border-radius: 8px;
+    background-color: #222;
+    color: white;
+    font-size: 16px;
+    resize: none;
+    outline: none;
+    transition: border-color 0.3s, opacity 0.5s;
+    opacity: 0; /* Set initial opacity to 0 for the animation */
+}
+
+.animated-textarea {
+    animation: fadeInTextarea 1s ease-in-out forwards; /* Use fadeInTextarea animation */
+}
+
+@keyframes fadeInTextarea {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Add this to your existing style block */
+.process-button {
+    background-color: var(--color-blue);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.process-button:hover {
+    background-color: var(--color-green); /* Change color on hover */
+}
+
+
+/* Add this to your existing style block */
+.loader-container {
+    position: relative;
+}
+
+/* Add this to your existing style block */
+.button-loader-container {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    justify-content: center; /* Center items horizontally */
+}
+
+.loader {
+    display: none;
+    margin-left: 10px; /* Adjust the margin as needed */
+    border: 8px solid rgba(255, 255, 255, 0.3);
+    border-top: 8px solid white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+        img {
+            max-width: 100%; /* Ensure the image doesn't exceed its natural size */
+            max-height: 100%; /* Ensure the image doesn't exceed its natural size */
+            display: block; /* Remove any default spacing and alignment */
+            margin: auto; /* Center the image horizontally */
+        }
+
+
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .card {
+            width: 300px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .actor-name {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .actor-info {
+            color: #777;
+        }
+
+
+
+        .animation-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .animation-text {
+            font-size: 2em;
+            font-weight: bold;
+            opacity: 0;
+            animation: appear 2s ease-in-out forwards;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .films-list {
+            font-size: 1.5em;
+            margin-top: 10px;
+            opacity: 0;
+            animation: appear 2s ease-in-out forwards;
+            animation-delay: 2s; /* Delay the animation to start after the text animation */
+        }
+    </style>
+</head>
+<body>
+
+<div class="col-lg-12">
+        <br>
+  <br>
+  <img src="{{ url_for('static', filename='logo.webp') }}">
+  <br>
+  <center>With ❤️ by Fabrica Rosta</center>
+    <textarea id="myTextarea" class="animated-textarea" placeholder="Your Message"></textarea>
+</div>
+
+
+
+<!-- Add this inside the .row text-center, before or after the textarea -->
+<div class="col-lg-12 text-center">
+  <br>
+    <div class="loader-container">
+        <button id="processButton" class="process-button">Process</button>
+      <br>
+      <br>
+        <center><div id="loader" class="loader"></div></center>
+    </div>
+</div>
+
+
+<div id="full" >
+
+<center>
+<div class="animation-container">
+    <div class="animation-text">
+        Most Similar Films are...
+        <span class="films-list" id="filmsList">Film 1, Film 2, Film 3</span> <!-- Add more films as needed -->
+    </div>
+</div>
+</center>
+
+<br>
+<center>
+<div class="animation-container">
+    <div class="animation-text">
+      and most likely such film will get
+        <span class="films-list">R-G</span> <!-- Add more films as needed -->
+      rating
+    </div>
+</div>
+</center>
+<br>
+<center>
+  <div class="animation-container">
+    <div class="animation-text">
+      with aprox. budget of
+        <span class="films-list">3M$</span> <!-- Add more films as needed -->
+    </div>
+</div>
+</center>
+<br>
+<div class="animation-container">
+    <div class="animation-text">
+      in gener
+        <span class="films-list">Drams</span> or <span class="films-list">Sport Movie</span> <!-- Add more films as needed -->
+
+    </div>
+</div>
+    <div class="wrapper image-wrapper">
+      <div class="container inner">
+        <div class="row">
+          <div class="col-md-10 offset-md-1">
+            <h2 class="title-color text-center">SO...</h2>
+              <br><br><br>
+               <div class="row text-center">              
+              <div class="col-lg-3">
+                <div class="progressbar circle blue" data-value="30"></div>
+                <h5>New Visitors</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+              </div>
+             
+              <div class="col-lg-3">
+                <div class="progressbar circle green" data-value="80"></div>
+                <h5>Social Media</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+              </div>
+                
+              <div class="col-lg-3">
+                <div class="progressbar circle red" data-value="100"></div>
+                <h5>Referrals</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+              </div>
+               
+              <div class="col-lg-3">
+                <div class="progressbar circle yellow" data-value="80"></div>
+                <h5>Search Engines</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+              </div>
+           </div>
+         </div>
+        </div>
+        </div>
+            <br>
+      <br>
+            <h2 class="title-color text-center">CAST #1 with aprox. budget 3M$ in Horror genre with estimate rating on Netflix 4.3 and 4.0 on IMDB</h2>
+      <div class="gallery">
+    <!-- Actor 1 -->
+    <div class="card">
+        <img src="actor1.jpg" alt="Actor 1">
+        <div class="card-content">
+            <div class="actor-name">John Doe</div>
+            <div class="actor-info">Age: 35</div>
+            <div class="actor-info">Country: USA</div>
+        </div>
+    </div>
+
+    <!-- Actor 2 -->
+    <div class="card">
+        <img src="actor2.jpg" alt="Actor 2">
+        <div class="card-content">
+            <div class="actor-name">Jane Doe</div>
+            <div class="actor-info">Age: 30</div>
+            <div class="actor-info">Country: Canada</div>
+        </div>
+    </div>
+
+            <div class="card">
+        <img src="actor2.jpg" alt="Actor 2">
+        <div class="card-content">
+            <div class="actor-name">Jane Doe</div>
+            <div class="actor-info">Age: 30</div>
+            <div class="actor-info">Country: Canada</div>
+        </div>
+    </div>
+
+
+            <div class="card">
+        <img src="actor2.jpg" alt="Actor 2">
+        <div class="card-content">
+            <div class="actor-name">Jane Doe</div>
+            <div class="actor-info">Age: 30</div>
+            <div class="actor-info">Country: Canada</div>
+        </div>
+    </div>
+
+            <div class="card">
+        <img src="actor2.jpg" alt="Actor 2">
+        <div class="card-content">
+            <div class="actor-name">Jane Doe</div>
+            <div class="actor-info">Age: 30</div>
+            <div class="actor-info">Country: Canada</div>
+        </div>
+    </div>
+
+
+
+    <!-- Add more actor cards as needed -->
+</div>
+
+</div>
+</div>
+<center>
+
+
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-2.2.4.js"></script> 
+  
+  <script src="progressbar.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+  
+  
+
+  <script>
+
+      function t(){
+    $(document).ready(function() {
+    var $textarea = $('#myTextarea');
+
+    $textarea.waypoint(function() {
+        $textarea.addClass('animated-textarea');
+    }, {
+        offset: '75%' // Adjust this offset based on when you want the animation to trigger
+    });
+});
+
+
+    $(document).ready(function() {
+	'use strict';
+
+
+	var $pline = $('.progressbar.line');
+	var $pcircle = $('.progressbar.circle');
+	$pline.each(function(i) {
+		var line = new ProgressBar.Line(this, {
+			strokeWidth: 6,
+			trailWidth: 6,
+			duration: 3000,
+			easing: 'easeInOut',
+			text: {
+				style: {
+					color: 'inherit',
+					position: 'absolute',
+					right: '0',
+					top: '-30px',
+					padding: 0,
+					margin: 0,
+					transform: null
+				},
+				autoStyleContainer: false
+			},
+			step: function(state, line, attachment) {
+				line.setText(Math.round(line.value() * 100) + ' %');
+			}
+		});
+		var value = ($(this).attr('data-value') / 100);
+		$pline.waypoint(function() {
+			line.animate(value);
+		}, {
+			offset: "100%"
+		})
+	});
+	$pcircle.each(function(i) {
+		var circle = new ProgressBar.SemiCircle(this, {
+			strokeWidth: 5,
+			trailWidth: 5,
+			duration: 2000,
+			easing: 'easeInOut',
+			step: function(state, circle, attachment) {
+				circle.setText(Math.round(circle.value() * 100));
+			}
+		});
+		var value = ($(this).attr('data-value') / 100);
+		$pcircle.waypoint(function() {
+			circle.animate(value);
+		}, {
+			offset: "100%"
+		})
+	});
+
+	$('.counter .value').counterUp({
+		delay: 50,
+		time: 1000
+	});
+
+
+
+
+});}
+
+
+    // Add this to your existing script tag
+$(document).ready(function() {
+    var $textarea = $('#myTextarea');
+    var $processButton = $('#processButton');
+    var $loader = $('#loader');
+
+    $textarea.waypoint(function() {
+        $textarea.addClass('animated-textarea');
+    }, {
+        offset: '75%'
+    });
+
+    $processButton.on('click', function() {
+        // Show loader and change button text
+        $loader.show();
+        $processButton.text('Processing...');
+
+        // Simulate processing (you can replace this with your actual processing logic)
+        setTimeout(function() {
+            // Hide loader and restore button text
+            $loader.hide();
+            $processButton.text('Process');
+        }, 9000); // Simulated processing time (3 seconds)
+    });
+});
+
+    </script>
+
+
+    <script>
+    // Intersection Observer code as before
+
+    const processButton = document.getElementById('processButton');
+    const loader = document.getElementById('loader');
+
+    processButton.addEventListener('click', () => {
+        // Hide elements by class
+        document.querySelectorAll('.animation-text, .films-list').forEach(element => {
+            element.style.display = 'none';
+        });
+
+        // Show loader
+        loader.style.display = 'block';
+
+        // Simulate API request delay
+        setTimeout(() => {
+            // Fetch data from the API (replace with your API endpoint)
+            fetch('https://65728156d61ba6fcc0151a46.mockapi.io/test/rrr')
+                .then(response => response.json())
+                .then(data => {
+                    let r = data;
+                    console.log(data[0]['test'])
+                    // Update text content with API data
+                    const filmsListElement = document.getElementById('filmsList');
+
+                    filmsListElement.innerHTML = `Film 1, Film 2, Film 3, ${data[0]['test']}`;
+                })
+                .catch(error => console.error('Error fetching data:', error))
+                .finally(() => {
+                    // Hide loader and show updated content
+                    loader.style.display = 'none';
+                    // Show elements by class
+                    document.querySelectorAll('.animation-text, .films-list').forEach(element => {
+                        element.style.display = '';
+                    });
+                });
+        }, 1000); // Simulated delay in milliseconds
+    });
+</script>
+</center></body>
+</html>
