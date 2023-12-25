@@ -14,9 +14,9 @@ def query_rating_prediction_from_hf(promt: str, api_endpoint: str):
 
 
 def query_genre(promt: str):
-    print(query_rating_prediction_from_hf(api_endpoint=API_URL_GENRE, promt=promt))
+    return query_rating_prediction_from_hf(api_endpoint=API_URL_GENRE, promt=promt)
 
 
 def query_age_rating(promt: str):
-    print(query_rating_prediction_from_hf(api_endpoint=API_URL_AGE_RATING, promt=promt))
+    return query_rating_prediction_from_hf(api_endpoint=API_URL_AGE_RATING, promt=promt)
 
