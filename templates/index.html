@@ -329,7 +329,7 @@ textarea {
 <div class="animation-container">
     <div class="animation-text">
       and most likely such film will get
-        <span class="films-list">R-G</span> <!-- Add more films as needed -->
+        <span class="films-list" id="age_r">R-G</span> <!-- Add more films as needed -->
       rating
     </div>
 </div>
@@ -339,7 +339,7 @@ textarea {
   <div class="animation-container">
     <div class="animation-text">
       with aprox. budget of
-        <span class="films-list">3M$</span> <!-- Add more films as needed -->
+        <span class="films-list" id="avg_budget">3M$</span> <!-- Add more films as needed -->
     </div>
 </div>
 </center>
@@ -347,7 +347,7 @@ textarea {
 <div class="animation-container">
     <div class="animation-text">
       in gener
-        <span class="films-list">Drams</span> or <span class="films-list">Sport Movie</span> <!-- Add more films as needed -->
+        <span class="films-list" id="genres">Drams</span> <!-- Add more films as needed -->
 
     </div>
 </div>
@@ -356,86 +356,17 @@ textarea {
         <div class="row">
           <div class="col-md-10 offset-md-1">
             <h2 class="title-color text-center">SO...</h2>
-              <br><br><br>
-               <div class="row text-center">              
-              <div class="col-lg-3">
-                <div class="progressbar circle blue" data-value="30"></div>
-                <h5>New Visitors</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-              </div>
-             
-              <div class="col-lg-3">
-                <div class="progressbar circle green" data-value="80"></div>
-                <h5>Social Media</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-              </div>
-                
-              <div class="col-lg-3">
-                <div class="progressbar circle red" data-value="100"></div>
-                <h5>Referrals</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-              </div>
-               
-              <div class="col-lg-3">
-                <div class="progressbar circle yellow" data-value="80"></div>
-                <h5>Search Engines</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-              </div>
-           </div>
+              <br><br>
          </div>
         </div>
         </div>
             <br>
       <br>
-            <h2 class="title-color text-center">CAST #1 with aprox. budget 3M$ in Horror genre with estimate rating on Netflix 4.3 and 4.0 on IMDB</h2>
-      <div class="gallery">
+            <h2 class="title-color text-center">CAST</h2>
+      <div class="gallery" id="actorss">
     <!-- Actor 1 -->
-    <div class="card">
-        <img src="actor1.jpg" alt="Actor 1">
-        <div class="card-content">
-            <div class="actor-name">John Doe</div>
-            <div class="actor-info">Age: 35</div>
-            <div class="actor-info">Country: USA</div>
-        </div>
-    </div>
-
-    <!-- Actor 2 -->
-    <div class="card">
-        <img src="actor2.jpg" alt="Actor 2">
-        <div class="card-content">
-            <div class="actor-name">Jane Doe</div>
-            <div class="actor-info">Age: 30</div>
-            <div class="actor-info">Country: Canada</div>
-        </div>
-    </div>
-
-            <div class="card">
-        <img src="actor2.jpg" alt="Actor 2">
-        <div class="card-content">
-            <div class="actor-name">Jane Doe</div>
-            <div class="actor-info">Age: 30</div>
-            <div class="actor-info">Country: Canada</div>
-        </div>
-    </div>
 
 
-            <div class="card">
-        <img src="actor2.jpg" alt="Actor 2">
-        <div class="card-content">
-            <div class="actor-name">Jane Doe</div>
-            <div class="actor-info">Age: 30</div>
-            <div class="actor-info">Country: Canada</div>
-        </div>
-    </div>
-
-            <div class="card">
-        <img src="actor2.jpg" alt="Actor 2">
-        <div class="card-content">
-            <div class="actor-name">Jane Doe</div>
-            <div class="actor-info">Age: 30</div>
-            <div class="actor-info">Country: Canada</div>
-        </div>
-    </div>
 
 
 
@@ -583,28 +514,63 @@ $(document).ready(function() {
         loader.style.display = 'block';
 
         // Simulate API request delay
-        setTimeout(() => {
-            // Fetch data from the API (replace with your API endpoint)
-            fetch('https://65728156d61ba6fcc0151a46.mockapi.io/test/rrr')
-                .then(response => response.json())
-                .then(data => {
-                    let r = data;
-                    console.log(data[0]['test'])
-                    // Update text content with API data
-                    const filmsListElement = document.getElementById('filmsList');
+setTimeout(() => {
+    // Replace 'param1', 'param2', etc. with your actual parameter values
+    const params = new URLSearchParams({
+        promt: document.getElementById('myTextarea').value
+    });
 
-                    filmsListElement.innerHTML = `Film 1, Film 2, Film 3, ${data[0]['test']}`;
-                })
-                .catch(error => console.error('Error fetching data:', error))
-                .finally(() => {
-                    // Hide loader and show updated content
-                    loader.style.display = 'none';
-                    // Show elements by class
-                    document.querySelectorAll('.animation-text, .films-list').forEach(element => {
-                        element.style.display = '';
-                    });
-                });
-        }, 1000); // Simulated delay in milliseconds
+    // Fetch data from the API (replace with your API endpoint)
+    fetch(`/process?${params.toString()}`)
+        .then(response => response.json())
+        .then(data => {
+            let r = data;
+            // Update text content with API data
+            const filmsListElement = document.getElementById('filmsList');
+            filmsListElement.innerHTML = `${data['sim_films']}`;
+
+            const age = document.getElementById('age_r');
+            age.innerHTML = `${data['top_age']}`;
+
+            const genres = document.getElementById("genres");
+            genres.innerHTML =  `${data['top_genre']}`;
+
+            const avg_budget = document.getElementById("avg_budget");
+            avg_budget.innerHTML =  `${data['avg_budget']}` + "$";
+
+document.getElementById('actorss').innerHTML = "";
+for (var i in data['actors']) {
+    // Create a new div for each actor
+    var div = document.createElement('div');
+    div.className = 'card';
+
+    // Assuming 'data['actors'][i]' is an array with [name, info, image] structure
+    div.innerHTML = `
+        <img src="${data['actors'][i][2]}" alt="Actor ${i}">
+        <div class="card-content">
+            <div class="actor-name" style="color: black">${data['actors'][i][0]}</div>
+            <div class="actor-info" style="color: black">${data['actors'][i][1]}</div>
+        </div>
+    `;
+
+    // Append the div to the 'actorss' element
+    document.getElementById('actorss').appendChild(div);
+}
+
+
+
+
+        })
+        .catch(error =>  window.alert("Please re-request in 1 minute; model is warming up."))
+        .finally(() => {
+            // Hide loader and show updated content
+            loader.style.display = 'none';
+            // Show elements by class
+            document.querySelectorAll('.animation-text, .films-list').forEach(element => {
+                element.style.display = '';
+            });
+        });
+}, 3000); // Simulated delay in milliseconds
     });
 </script>
 </center></body>
